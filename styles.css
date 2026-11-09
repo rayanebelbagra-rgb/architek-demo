@@ -1,0 +1,422 @@
+/* ==========================================================================
+   Architek — maquette d'accueil (phase 2)
+   Registre relevé sur la référence : serif fine + sans neutre, fond pierre
+   froid, noir profond, un seul accent sauge pâle, demi-disques, rayons courts.
+   ========================================================================== */
+
+:root{
+  --pierre:#E2E3DE;      /* fond clair */
+  --encre:#181818;       /* sections sombres, textes */
+  --sauge:#D5D5B7;       /* accent unique : cartes, bouton, logo */
+  --craie:#ECEBE4;       /* texte sur fond sombre */
+  --gris:#77776F;        /* texte secondaire sur clair */
+  --gris-clair:#9A9A92;  /* texte secondaire sur sombre */
+  --trait:rgba(24,24,24,.14);
+  --trait-clair:rgba(236,235,228,.16);
+  --serif:'Instrument Serif', 'Times New Roman', serif;
+  --sans:'Instrument Sans', system-ui, -apple-system, sans-serif;
+  --gouttiere:40px;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--pierre);color:var(--encre);font-family:var(--sans);
+  font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+h1,h2,h3,p,figure,ul{margin:0}
+ul{padding:0;list-style:none}
+a{color:inherit;text-decoration:none}
+
+.wrap{max-width:1440px;margin-inline:auto;padding-inline:var(--gouttiere)}
+.centre{text-align:center}
+
+/* ---------- Typo ---------- */
+.titre-hero,.titre-section,.titre-intro,.titre-cta,.pied-titre,.carte-nom,
+.carte-methode h3,.atouts h3,.chiffre-valeur,.carte-domaine figcaption,.pied-marque{
+  font-family:var(--serif);font-weight:400;letter-spacing:-.01em;text-wrap:balance;hyphens:none}
+.titre-section{font-size:clamp(32px,3.2vw,46px);line-height:1.08}
+.titre-clair{color:var(--craie)}
+
+.etiquette{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.02em;margin-bottom:14px}
+.etiquette::before{content:"";width:12px;height:12px;flex:none;
+  background:
+    radial-gradient(circle at 0 50%,currentColor 5.6px,transparent 6px) 0 0/6px 12px no-repeat,
+    radial-gradient(circle at 100% 50%,currentColor 5.6px,transparent 6px) 6px 0/6px 12px no-repeat}
+
+/* ---------- Pastilles (boutons) ---------- */
+.pastille{display:inline-block;border-radius:999px;font-size:12px;font-weight:500;
+  padding:8px 16px;line-height:1.2;transition:transform .2s ease, background .2s ease}
+.pastille:hover{transform:translateY(-1px)}
+.pastille-sombre{background:var(--encre);color:var(--craie)}
+.pastille-sombre:hover{background:#000}
+.pastille-sauge{background:var(--sauge);color:var(--encre)}
+
+/* ---------- En-tête ---------- */
+.entete{position:absolute;inset:0 0 auto 0;z-index:30;padding-block:22px;color:var(--encre)}
+.entete-rangee{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.marque{display:grid;grid-template-columns:auto auto;column-gap:8px;align-items:center;
+  font-size:10.5px;line-height:1.15}
+.marque::before{content:"";grid-row:span 2;width:44px;height:19px;background:var(--encre);
+  -webkit-mask:url(img/logo.svg) center/contain no-repeat;mask:url(img/logo.svg) center/contain no-repeat}
+.marque-nom{font-weight:500}
+.marque-sous{grid-column:2}
+.menu{display:flex;gap:44px;font-size:12px}
+.menu a{opacity:.85;transition:opacity .2s}
+.menu a:hover,.menu a.est-courant{opacity:1}
+.burger{display:none}
+
+/* ---------- Héros ---------- */
+.hero{position:relative;height:clamp(600px,64vw,940px);overflow:hidden;color:var(--craie)}
+.hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 60%}
+.hero::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(226,227,222,.55) 0%,rgba(226,227,222,0) 22%,rgba(10,10,10,0) 50%,rgba(10,10,10,.62) 100%)}
+.hero-bas{position:absolute;inset:auto 0 0 0;z-index:2;display:grid;
+  grid-template-columns:1fr minmax(0,300px) auto;align-items:end;gap:48px;padding-bottom:48px}
+.titre-hero{font-size:clamp(46px,5.4vw,80px);line-height:1.02;max-width:9.5em;color:#EDEBDD}
+.hero-texte{font-size:12px;line-height:1.6;opacity:.85;padding-bottom:4px}
+
+/* ---------- Intro ---------- */
+.intro{padding-block:120px 110px}
+.intro-grille{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.demi-disques{display:flex;gap:18px;justify-content:center}
+.demi-disque{width:min(230px,44%);aspect-ratio:1/2;overflow:hidden;
+  border-radius:100% 0 0 100% / 50% 0 0 50%}
+.demi-disque img{width:100%;height:100%;object-fit:cover}
+.titre-intro{font-size:clamp(30px,2.9vw,42px);line-height:1.12;max-width:15em;margin-bottom:56px}
+.chiffres{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--trait)}
+.chiffre{padding:22px 24px 20px;display:flex;flex-direction:column;justify-content:space-between;
+  min-height:150px;border-bottom:1px solid var(--trait)}
+.chiffre:nth-child(odd){border-right:1px solid var(--trait);padding-left:0}
+.chiffre-sombre{background:var(--encre);color:var(--craie);padding-left:24px;border-bottom-color:var(--encre)}
+.chiffre-legende{font-size:11px;line-height:1.45;max-width:17em;opacity:.8}
+.chiffre-valeur{font-size:44px;line-height:1}
+
+/* ---------- Projets ---------- */
+.projets{padding-block:60px 120px}
+.tete-centree{text-align:center;margin-bottom:56px}
+.tete-centree .titre-section{max-width:11em;margin-inline:auto}
+.grille-projets{display:grid;grid-template-columns:repeat(3,1fr);gap:48px 16px;margin-bottom:56px}
+.carte-photo{position:relative;aspect-ratio:1/1;overflow:hidden;border-radius:2px;margin-bottom:14px}
+.carte-photo img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.carte-projet:hover .carte-photo img{transform:scale(1.035)}
+.badge{position:absolute;top:12px;right:12px;background:var(--encre);color:var(--craie);
+  font-size:10px;padding:4px 9px;border-radius:2px}
+.carte-ligne{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.carte-nom{font-size:19px;line-height:1.2}
+.carte-surface{font-size:11px}
+.carte-lieu{font-size:11px;color:var(--gris);margin-top:2px}
+
+/* ---------- Domaines ---------- */
+.domaines{padding-block:20px 140px}
+.tete-gauche{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px}
+.tete-gauche .titre-section{max-width:8em}
+.titre-fleche::after{content:" ↘";font-family:var(--sans);font-size:.4em;vertical-align:middle;opacity:.6}
+.domaines-grille{display:grid;grid-template-columns:1.1fr 1fr 1fr 1fr;gap:16px;align-items:end}
+.domaines-texte{font-size:12px;line-height:1.6;max-width:22em;padding-bottom:4px}
+.carte-domaine{position:relative;aspect-ratio:3/4;overflow:hidden;border-radius:2px}
+.carte-domaine img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.carte-domaine:hover img{transform:scale(1.04)}
+.carte-domaine::after{content:"";position:absolute;inset:50% 0 0 0;background:linear-gradient(transparent,rgba(0,0,0,.5))}
+.carte-domaine figcaption{position:absolute;left:16px;bottom:14px;z-index:2;color:#fff;font-size:21px;line-height:1.1}
+
+/* ---------- Vision (sombre) ---------- */
+.vision{background:var(--encre);padding-block:120px 80px}
+.vision .titre-section{max-width:14em;margin-inline:auto;margin-bottom:56px}
+.tranches{--D:min(500px,52vw);display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:44px}
+/* Les quatre tranches découpent UNE seule image continue : chaque img fait
+   la largeur totale de la composition et se décale de la position de sa tranche. */
+.tranche{position:relative;overflow:hidden;flex:none}
+.tranche img{position:absolute;top:50%;transform:translateY(-50%);max-width:none;
+  width:calc(var(--D)*1.63 + 42px);height:var(--D);object-fit:cover}
+.tranche-1{width:var(--D);height:var(--D);border-radius:50%}
+.tranche-2{width:calc(var(--D)*.34);height:var(--D);border-radius:0 100% 100% 0 / 0 50% 50% 0}
+.tranche-3{width:calc(var(--D)*.2);height:calc(var(--D)*.84);border-radius:0 100% 100% 0 / 0 50% 50% 0}
+.tranche-4{width:calc(var(--D)*.09);height:calc(var(--D)*.62);border-radius:0 100% 100% 0 / 0 50% 50% 0}
+.tranche-1 img{left:0}
+.tranche-2 img{left:calc(-1*(var(--D) + 14px))}
+.tranche-3 img{left:calc(-1*(var(--D)*1.34 + 28px))}
+.tranche-4 img{left:calc(-1*(var(--D)*1.54 + 42px))}
+.vision-legende{text-align:center;font-size:11px;color:var(--gris-clair)}
+
+/* ---------- Territoire (sombre) ---------- */
+.territoire{background:var(--encre);color:var(--craie);padding-block:80px 110px}
+.territoire-tete{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;margin-bottom:24px}
+.territoire-tete .titre-section{max-width:9em}
+.territoire-texte{font-size:11px;line-height:1.6;color:var(--gris-clair);max-width:20em;padding-top:12px}
+.territoire-corps{display:grid;grid-template-columns:1fr 2fr;gap:40px;align-items:end}
+.atouts{display:grid;gap:30px;padding-bottom:20px}
+.atouts h3{font-size:18px;line-height:1.2;margin-bottom:6px}
+.atouts p{font-size:11px;color:var(--gris-clair);max-width:24em}
+.carte{position:relative;width:min(100%,620px);margin-left:auto;aspect-ratio:1000/963;
+  background:url(img/carte-france.svg) center/contain no-repeat}
+.repere{position:absolute;transform:translate(-11px,-11px);display:flex;align-items:center;gap:8px;
+  font-size:10.5px;color:var(--gris-clair);white-space:nowrap}
+.repere::before{content:"";width:22px;height:22px;border-radius:50%;flex:none;
+  background:
+    radial-gradient(circle at 50% 0,var(--encre) 4.6px,transparent 5px) 6px 5px/10px 6px no-repeat,
+    radial-gradient(circle at 50% 100%,var(--encre) 4.6px,transparent 5px) 6px 11px/10px 6px no-repeat,
+    #F3F2EC;
+  box-shadow:0 0 0 5px rgba(243,242,236,.08)}
+.repere:not(.repere-agence){font-size:0;gap:0}
+.repere-agence{color:var(--sauge)}
+.repere-agence::before{background:
+    radial-gradient(circle at 50% 0,var(--encre) 4.6px,transparent 5px) 6px 5px/10px 6px no-repeat,
+    radial-gradient(circle at 50% 100%,var(--encre) 4.6px,transparent 5px) 6px 11px/10px 6px no-repeat,
+    var(--sauge);
+  box-shadow:0 0 0 6px rgba(213,213,183,.18)}
+
+/* ---------- Méthode ---------- */
+.methode{padding-block:120px 130px}
+.methode-tete{display:grid;grid-template-columns:1fr 2fr;gap:16px;align-items:start;margin-bottom:48px}
+.methode-tete .titre-section{max-width:11em}
+.methode-grille{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.methode-texte{font-size:12px;line-height:1.6;max-width:24em}
+.carte-methode{background:var(--sauge);border-radius:8px;padding:24px 24px 26px;min-height:300px;
+  display:flex;flex-direction:column;justify-content:flex-end}
+.carte-methode::before{content:"";width:46px;height:46px;margin-bottom:auto}
+.carte-methode h3{font-size:19px;line-height:1.2;margin:56px 0 12px}
+.carte-methode p{font-size:11.5px;line-height:1.6;max-width:30em}
+.ic-noeud::before{background:
+  radial-gradient(circle at 0 50%,var(--encre) 22.6px,transparent 23px) 0 0/23px 46px no-repeat,
+  radial-gradient(circle at 100% 50%,var(--encre) 22.6px,transparent 23px) 23px 0/23px 46px no-repeat}
+.ic-double::before{width:50px;background:
+  radial-gradient(circle at 0 50%,var(--encre) 22.6px,transparent 23px) 0 0/23px 46px no-repeat,
+  radial-gradient(circle at 0 50%,var(--encre) 22.6px,transparent 23px) 25px 0/23px 46px no-repeat}
+.ic-sablier::before{background:
+  radial-gradient(circle at 50% 0,var(--encre) 22.6px,transparent 23px) 0 0/46px 23px no-repeat,
+  radial-gradient(circle at 50% 100%,var(--encre) 22.6px,transparent 23px) 0 23px/46px 23px no-repeat}
+.ic-lune::before{width:48px;background:
+  radial-gradient(circle at 100% 50%,var(--encre) 22.6px,transparent 23px) 0 0/23px 46px no-repeat,
+  radial-gradient(circle at 0 50%,var(--encre) 22.6px,transparent 23px) 26px 0/23px 46px no-repeat}
+/* Tuile graphique : demi-disques noirs, composés uniquement en CSS */
+/* .motif (maquette) et .avec-motif::after (thème WordPress) : même tuile.
+   En pseudo-élément, elle devient une cellule de la grille sans bloc vide. */
+.avec-motif::after{content:""}
+.motif,.avec-motif::after{border-radius:8px;min-height:300px;background-color:var(--pierre);
+  --c:var(--encre);
+  /* Ligne 1 : une arche (deux quarts de disque) puis un demi-disque.
+     Ligne 2 : demi-disque, dôme, quart de disque. */
+  background-image:
+    radial-gradient(circle farthest-side at 100% 100%,var(--c) 99.4%,transparent 100%),
+    radial-gradient(circle farthest-side at 0 100%,var(--c) 99.4%,transparent 100%),
+    radial-gradient(circle farthest-side at 0 50%,var(--c) 49.6%,transparent 50%),
+    radial-gradient(circle farthest-side at 100% 50%,var(--c) 49.6%,transparent 50%),
+    radial-gradient(circle farthest-side at 50% 100%,var(--c) 49.6%,transparent 50%),
+    radial-gradient(circle farthest-side at 0 0,var(--c) 99.4%,transparent 100%);
+  background-size:33.4% 50%;
+  background-position:0 0,50% 0,100% 0,0 100%,50% 100%,100% 100%;
+  background-repeat:no-repeat}
+
+/* ---------- Appel à l'action ---------- */
+.cta{position:relative;padding-top:260px;overflow:hidden}
+.cta::before{content:"";position:absolute;inset:40px 0 auto 0;height:520px;opacity:.55;
+  background:
+    radial-gradient(circle at 50% 100%,#D8D9D3 69.5%,transparent 70%) 2% 0/26% 100% no-repeat,
+    radial-gradient(circle at 50% 100%,#D8D9D3 69.5%,transparent 70%) 36% 0/30% 100% no-repeat,
+    radial-gradient(circle at 50% 100%,#D8D9D3 69.5%,transparent 70%) 70% 0/22% 100% no-repeat,
+    radial-gradient(circle at 0 100%,#D8D9D3 69.5%,transparent 70%) 100% 0/14% 100% no-repeat}
+.cta-photo{position:relative;z-index:1;width:100%;height:clamp(480px,48vw,700px);object-fit:cover;object-position:50% 70%}
+.cta-bloc{position:absolute;z-index:2;left:0;bottom:0;width:min(58%,820px);background:var(--encre);color:var(--craie);
+  padding:64px 160px 64px var(--gouttiere);border-bottom-right-radius:22% 100%}
+.titre-cta{font-size:clamp(26px,2.4vw,36px);line-height:1.12;max-width:16em;margin-bottom:18px}
+.cta-bloc p{font-size:11.5px;line-height:1.6;color:var(--gris-clair);max-width:36em;margin-bottom:26px}
+
+/* ---------- Pied de page ---------- */
+.pied{background:var(--encre);color:var(--craie)}
+.pied-haut{display:grid;grid-template-columns:1fr 1fr;gap:48px;padding-block:84px 90px}
+.pied-titre{font-size:clamp(26px,2.3vw,34px);line-height:1.1;margin-bottom:16px}
+.pied-texte{font-size:11px;color:var(--gris-clair);max-width:26em}
+.pied-colonnes{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;font-size:11.5px}
+.pied-colonnes > div{display:flex;flex-direction:column;gap:8px}
+.pied-colonnes a{opacity:.9}
+.pied-colonnes a:hover{opacity:1;color:var(--sauge)}
+.pied-tete{color:var(--gris-clair);font-size:10.5px;margin-bottom:8px}
+.pied-bas{position:relative;padding-block:120px 36px;overflow:hidden}
+.pied-bas::before{content:"";position:absolute;inset:0;
+  --g:#202020;
+  background:
+    radial-gradient(circle at 50% 50%,var(--g) 49.5%,transparent 50%) 0 0/180px 180px,
+    radial-gradient(circle at 0 50%,var(--g) 49.5%,transparent 50%) 90px 90px/180px 180px}
+.pied-bas-rangee{position:relative;display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+.pied-marque{display:grid;grid-template-columns:auto auto;column-gap:22px;align-items:center;
+  color:var(--sauge);font-size:clamp(34px,3.6vw,52px);line-height:1}
+.pied-marque::before{content:"";grid-row:span 2;width:clamp(150px,15vw,220px);aspect-ratio:92/40;background:var(--sauge);
+  -webkit-mask:url(img/logo.svg) center/contain no-repeat;mask:url(img/logo.svg) center/contain no-repeat}
+.pied-marque > :last-child{grid-column:2}
+.pied-legal{display:flex;gap:32px;font-size:10.5px;color:var(--gris-clair)}
+
+/* ==========================================================================
+   Pages internes (phase 3) — mêmes composants, aucun nouveau registre
+   ========================================================================== */
+.page-tete{padding-block:190px 72px}
+.page-tete-grille{display:grid;grid-template-columns:2fr 1fr;gap:64px;align-items:end}
+.titre-page{font-family:var(--serif);font-weight:400;letter-spacing:-.01em;text-wrap:balance;hyphens:none;
+  font-size:clamp(42px,4.6vw,68px);line-height:1.04;max-width:13em}
+.page-chapo{font-size:12.5px;line-height:1.6;max-width:24em;padding-bottom:8px}
+.bandeau{height:clamp(360px,42vw,620px);overflow:hidden}
+.bandeau img{width:100%;height:100%;object-fit:cover}
+.texte-courant{display:grid;gap:14px;font-size:12.5px;line-height:1.65;max-width:34em;margin:-28px 0 40px}
+.methode-sans-haut{padding-top:20px}
+.projets-page{padding-top:0}
+
+/* Équipe : portraits en arche (demi-disque posé sur un rectangle, géométrie du registre) */
+.equipe{padding-block:110px 100px}
+.equipe-tete{display:grid;grid-template-columns:2fr 1fr;gap:64px;align-items:end;margin-bottom:48px}
+.equipe-tete .titre-section{max-width:14em}
+.equipe-texte{font-size:12px;line-height:1.6;max-width:24em;padding-bottom:6px}
+.equipe-grille{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.membre-photo{aspect-ratio:4/5;overflow:hidden;border-radius:50% 50% 2px 2px / 40% 40% 2px 2px;margin-bottom:18px}
+.membre-photo img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.membre:hover .membre-photo img{transform:scale(1.03)}
+.membre-role{font-size:11px;color:var(--gris);margin-bottom:4px}
+.membre-nom{font-family:var(--serif);font-weight:400;font-size:24px;line-height:1.15;margin-bottom:10px}
+.membre-bio{font-size:11.5px;line-height:1.6;max-width:30em}
+
+.etapes-section{background:var(--encre);color:var(--craie);padding-block:120px}
+.etapes{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--trait-clair);margin-top:40px}
+.etape{padding:28px 28px 44px 0;border-bottom:1px solid var(--trait-clair)}
+.etape:not(:nth-child(3n)){border-right:1px solid var(--trait-clair)}
+.etape:not(:nth-child(3n+1)){padding-left:28px}
+.etape-num{font-family:var(--serif);font-size:44px;line-height:1;color:var(--sauge);margin-bottom:48px}
+.etape h3{font-family:var(--serif);font-weight:400;font-size:21px;line-height:1.2;margin-bottom:8px}
+.etape p:last-child{font-size:11.5px;line-height:1.6;color:var(--gris-clair);max-width:26em}
+
+.contact{padding-block:20px 130px}
+.contact-grille{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.coordonnees{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--trait)}
+.coord{padding:22px 24px 20px 0;min-height:150px;display:flex;flex-direction:column;justify-content:space-between;border-bottom:1px solid var(--trait)}
+.coord:nth-child(odd){border-right:1px solid var(--trait)}
+.coord:nth-child(even){padding-left:24px}
+.coord-sombre{background:var(--encre);color:var(--craie);border-bottom-color:var(--encre)}
+.coord-valeur{font-family:var(--serif);font-size:24px;line-height:1.15}
+.formulaire{display:grid;grid-template-columns:1fr 1fr;gap:20px 16px}
+.champ{display:flex;flex-direction:column;gap:8px}
+.champ-large{grid-column:1/-1}
+.champ label{font-size:11px;color:var(--gris)}
+.champ input,.champ select,.champ textarea{display:block;width:100%;font:inherit;font-size:13px;color:var(--encre);
+  background:transparent;border:0;border-bottom:1px solid rgba(24,24,24,.3);border-radius:0;padding:10px 0;outline:none}
+.champ textarea{resize:vertical;min-height:120px}
+.champ input:focus,.champ select:focus,.champ textarea:focus{border-bottom-color:var(--encre)}
+.formulaire .pastille{border:0;cursor:pointer;font-family:var(--sans);padding:12px 22px}
+
+@media (max-width:980px){
+  .page-tete-grille,.contact-grille,.equipe-tete{grid-template-columns:1fr;gap:28px}
+  .equipe-grille{grid-template-columns:1fr 1fr;row-gap:40px}
+  .etapes{grid-template-columns:1fr 1fr}
+  .etape,.etape:not(:nth-child(3n+1)){padding:24px 20px 36px 0;border-right:0}
+  .etape:nth-child(odd){border-right:1px solid var(--trait-clair)}
+  .etape:nth-child(even){padding-left:20px}
+}
+@media (max-width:640px){
+  .page-tete{padding-block:130px 48px}
+  .titre-page{font-size:40px}
+  .etapes{grid-template-columns:1fr}
+  .etape,.etape:nth-child(even){padding:22px 0 30px;border-right:0}
+  .formulaire{grid-template-columns:1fr}
+  .equipe{padding-block:80px 70px}
+  .equipe-grille{grid-template-columns:1fr}
+  .coord-valeur{font-size:19px}
+}
+
+:where(a,button,[tabindex]):focus-visible{outline:2px solid var(--sauge);outline-offset:3px;border-radius:4px}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (max-width:980px){
+  :root{--gouttiere:24px}
+  .menu{gap:24px}
+  .hero-bas{grid-template-columns:1fr auto;gap:24px}
+  .hero-texte{display:none}
+  .intro-grille{grid-template-columns:1fr;gap:56px}
+  .grille-projets{grid-template-columns:repeat(2,1fr)}
+  .domaines-grille{grid-template-columns:repeat(3,1fr)}
+  .domaines-texte{grid-column:1/-1;max-width:none}
+  .territoire-corps{grid-template-columns:1fr}
+  .atouts{order:2;grid-template-columns:repeat(3,1fr)}
+  .methode-tete{grid-template-columns:1fr}
+  .methode-grille{grid-template-columns:repeat(2,1fr)}
+  .methode-texte{grid-column:1/-1;margin-bottom:12px}
+  .cta-bloc{width:78%;padding-right:110px}
+  .pied-haut{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  :root{--gouttiere:16px}
+  .menu,.entete .pastille{display:none}
+  .burger{display:block;width:40px;height:40px;border:0;border-radius:50%;background:var(--encre);position:relative;cursor:pointer}
+  .burger span,.burger span::before{position:absolute;left:12px;width:16px;height:1.5px;background:var(--craie);content:""}
+  .burger span{top:16px}.burger span::before{left:0;top:6px}
+  .entete.est-ouvert .menu{display:flex;position:fixed;inset:76px 16px auto 16px;flex-direction:column;gap:18px;
+    background:var(--encre);color:var(--craie);padding:28px;border-radius:8px;font-size:16px}
+  .hero{height:600px}
+  .hero-bas{grid-template-columns:1fr;padding-bottom:28px}
+  .hero-bouton{justify-self:start}
+  .titre-hero{font-size:44px}
+  .intro{padding-block:80px}
+  .chiffre{padding:18px 14px 16px;min-height:130px}
+  .chiffre-valeur{font-size:36px}
+  .grille-projets{grid-template-columns:1fr;gap:36px}
+  .tete-gauche{flex-direction:column;align-items:flex-start;gap:20px}
+  .domaines-grille{grid-template-columns:1fr 1fr}
+  .carte-domaine:last-child{grid-column:1/-1;aspect-ratio:16/10}
+  .tranches{--D:56vw;gap:8px}
+  .territoire-tete{flex-direction:column;gap:12px}
+  .atouts{grid-template-columns:1fr;gap:22px}
+  .repere{font-size:0;gap:0}
+  .repere::before{transform:scale(.8)}
+  .methode-grille{grid-template-columns:1fr}
+  .carte-methode{min-height:260px}
+  /* Une colonne : la tuile décorative devient un gros bloc noir isolé, on la retire */
+  .motif,.avec-motif::after{display:none}
+  .methode{padding-bottom:72px}
+  .cta{padding-top:72px}
+  .cta-photo{height:340px}
+  .cta-bloc{position:relative;width:100%;padding:48px var(--gouttiere);border-radius:0}
+  .pied-colonnes{grid-template-columns:1fr 1fr;row-gap:36px}
+  .pied-bas-rangee{flex-direction:column;align-items:flex-start;gap:36px}
+  .pied-legal{gap:20px}
+}
+
+/* ==========================================================================
+   Animations
+   Les propriétés individuelles translate / scale / clip-path sont utilisées
+   à la place de transform : elles se cumulent avec les transform existants
+   (survols, repères de la carte) au lieu de les écraser.
+   Les états masqués n'existent que sous html.anime, classe posée par app.js :
+   sans JavaScript (ou dans l'éditeur WordPress), tout reste visible.
+   ========================================================================== */
+@keyframes monter{from{opacity:0;translate:0 28px}to{opacity:1;translate:none}}
+@keyframes fondu{from{opacity:0}to{opacity:1}}
+@keyframes recul{from{scale:1.12}to{scale:1}}
+
+/* Héros : entrée au chargement */
+.hero-photo{animation:recul 2.6s cubic-bezier(.2,.7,.2,1) both}
+.titre-hero{animation:monter 1.1s .25s cubic-bezier(.2,.7,.2,1) both}
+.hero-texte{animation:monter 1.1s .45s cubic-bezier(.2,.7,.2,1) both}
+.hero-bouton{animation:monter 1.1s .6s cubic-bezier(.2,.7,.2,1) both}
+.entete{animation:fondu 1.2s .1s ease both}
+/* Profondeur : la photo défile moins vite que la page (--defilement posé par app.js) */
+.anime .hero-photo{translate:0 calc(var(--defilement, 0) * .3px)}
+
+/* Apparitions au défilement */
+.anime .a-monter{opacity:0;translate:0 32px;
+  transition:opacity .9s cubic-bezier(.2,.7,.2,1),translate .9s cubic-bezier(.2,.7,.2,1)}
+.anime .a-rideau{clip-path:inset(14% 0 0 0);
+  transition:clip-path 1.3s cubic-bezier(.2,.7,.2,1)}
+.anime .a-glisser{clip-path:inset(0 0 0 100%);
+  transition:clip-path 1.3s cubic-bezier(.65,0,.2,1)}
+.anime .a-eclore{opacity:0;scale:.82;
+  transition:opacity .8s ease,scale 1.1s cubic-bezier(.2,.7,.2,1)}
+.anime .a-lateral{opacity:0;translate:-48px 0;
+  transition:opacity 1s ease,translate 1.1s cubic-bezier(.2,.7,.2,1)}
+.anime .est-visible{opacity:1;translate:none;scale:none}
+.anime .a-rideau.est-visible,.anime .a-glisser.est-visible{clip-path:inset(0)}
+
+/* Cascades : les éléments d'une même rangée arrivent l'un après l'autre */
+.anime .a-monter:nth-child(3n+2),.anime .a-eclore:nth-child(2),.anime .a-glisser:nth-child(2){transition-delay:.12s}
+.anime .a-monter:nth-child(3n){transition-delay:.24s}
+.anime .a-eclore:nth-child(3){transition-delay:.24s}
+.anime .a-eclore:nth-child(4){transition-delay:.36s}
+.anime .titre-section.a-monter,.anime .titre-intro.a-monter,.anime .titre-page.a-monter{transition-delay:.08s}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
